@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+int main() {
+    char str[100];
+    int len, i;
+    // Input string from the user
+    printf("Enter a string: ");
+    scanf("%s", str);
+
+    len = strlen(str);
+    i = 0;
+
+
+    if (len == 0) {
+        printf("The string belongs to the CFG language.\n");
+        return 0;
+    }
+
+    // Check if the string starts with '0'
+    if (str[0] == '0') {
+        i = 1;
+
+        // Check for 'A' part
+        while (i < len && str[i] == '0') {
+            i++;
+        }
+
+        // Check if the rest of the string follows the pattern '0A1'
+        if (i < len && str[i] == '1') {
+            i++;
+
+            // Check for the remaining part of 'A'
+            while (i < len && (str[i] == '0' || str[i] == '1')) {
+                i++;
+            }
+
+            // If the entire string is processed, it belongs to the CFG language
+            if (i == len || (i == 1 && str[1] == '\0')) {
+                printf("The string belongs to the CFG language.\n");
+                return 0;
+            }
+        }
+    }
+
+    // If any condition fails, the string does not belong to the CFG language
+    printf("The string does not belong to the CFG language.\n");
+
+    return 0;
+}
